@@ -1,0 +1,3 @@
+-- Data seeding is handled by the python script:
+--      scripts/dataload.py
+-- Run it manually after all Versioned (V) migrations are applied
