@@ -1,3 +1,5 @@
+BEGIN;
+
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
 
 CREATE TABLE "store" (
@@ -95,3 +97,5 @@ CREATE TABLE "transference" (
   "payment_id" INTEGER NOT NULL,
   "value" NUMERIC(10,2) NOT NULL
 );
+
+COMMIT;

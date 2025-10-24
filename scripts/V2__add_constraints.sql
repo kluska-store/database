@@ -1,3 +1,5 @@
+BEGIN;
+
 -- FOREIGN KEYS
 ALTER TABLE "store" ADD FOREIGN KEY ("address_id") REFERENCES "address" ("id");
 
@@ -52,3 +54,4 @@ ALTER TABLE "wish_list"
 ALTER TABLE "product"
     ADD CONSTRAINT "unique_product_per_store" UNIQUE ("name", "store_id");
 
+COMMIT;
