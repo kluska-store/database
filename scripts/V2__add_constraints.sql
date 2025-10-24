@@ -1,35 +1,50 @@
 BEGIN;
 
 -- FOREIGN KEYS
-ALTER TABLE "store" ADD FOREIGN KEY ("address_id") REFERENCES "address" ("id");
+ALTER TABLE "store" ADD CONSTRAINT "fk_store_address_id__address_id"
+    FOREIGN KEY ("address_id") REFERENCES "address" ("id");
 
-ALTER TABLE "store_phones" ADD FOREIGN KEY ("store_id") REFERENCES "store" ("id");
+ALTER TABLE "store_phones" ADD CONSTRAINT "fk_store_phones_store_id__store_id"
+    FOREIGN KEY ("store_id") REFERENCES "store" ("id");
 
-ALTER TABLE "user" ADD FOREIGN KEY ("address_id") REFERENCES "address" ("id");
+ALTER TABLE "user" ADD CONSTRAINT "fk_user_address_id__address_id"
+    FOREIGN KEY ("address_id") REFERENCES "address" ("id");
 
-ALTER TABLE "session" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
+ALTER TABLE "session" ADD CONSTRAINT "fk_session_user_id__user_id"
+    FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
-ALTER TABLE "product" ADD FOREIGN KEY ("store_id") REFERENCES "store" ("id");
+ALTER TABLE "product" ADD CONSTRAINT "fk_product_store_id__store_id"
+    FOREIGN KEY ("store_id") REFERENCES "store" ("id");
 
-ALTER TABLE "wish_list" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
+ALTER TABLE "wish_list" ADD CONSTRAINT "fk_wish_list_user_id__user_id"
+    FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
-ALTER TABLE "cart" ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
+ALTER TABLE "cart" ADD CONSTRAINT "fk_cart_user_id__user_id"
+    FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
 ALTER TABLE "wish_list_item"
-    ADD FOREIGN KEY ("wish_list_id") REFERENCES "wish_list" ("id"),
-    ADD FOREIGN KEY ("product_id") REFERENCES "product" ("id");
+    ADD CONSTRAINT "fk_wish_list_item_wish_list_id__wish_list_id"
+        FOREIGN KEY ("wish_list_id") REFERENCES "wish_list" ("id"),
+    ADD CONSTRAINT "fk_wish_list_item_product_id__product_id"
+        FOREIGN KEY ("product_id") REFERENCES "product" ("id");
 
 ALTER TABLE "cart_item"
-    ADD FOREIGN KEY ("cart_id") REFERENCES "cart" ("id"),
-    ADD FOREIGN KEY ("product_id") REFERENCES "product" ("id");
+    ADD CONSTRAINT "fk_cart_item_cart_id__cart_id"
+        FOREIGN KEY ("cart_id") REFERENCES "cart" ("id"),
+    ADD CONSTRAINT "fk_cart_item_product_id__product_id"
+        FOREIGN KEY ("product_id") REFERENCES "product" ("id");
 
 ALTER TABLE "payment"
-    ADD FOREIGN KEY ("payment_method_id") REFERENCES "payment_method" ("id"),
-    ADD FOREIGN KEY ("user_id") REFERENCES "user" ("id");
+    ADD CONSTRAINT "fk_payment_payment_method_id__payment_method_id"
+        FOREIGN KEY ("payment_method_id") REFERENCES "payment_method" ("id"),
+    ADD CONSTRAINT "fk_payment_user_id__user_id"
+        FOREIGN KEY ("user_id") REFERENCES "user" ("id");
 
 ALTER TABLE "transference"
-    ADD FOREIGN KEY ("store_id") REFERENCES "store" ("id"),
-    ADD FOREIGN KEY ("payment_id") REFERENCES "payment" ("id");
+    ADD CONSTRAINT "fk_transference_store_id__store_id"
+        FOREIGN KEY ("store_id") REFERENCES "store" ("id"),
+    ADD CONSTRAINT "fk_transference_payment_id__payment_id"
+        FOREIGN KEY ("payment_id") REFERENCES "payment" ("id");
 
 
 -- COMPLEX UNIQUE CONSTRAINTS
@@ -55,4 +70,4 @@ ALTER TABLE "product"
     ADD CONSTRAINT "unique_product_per_store" UNIQUE ("name", "store_id");
 
 COMMIT;
--- ROLLBACK;
+ROLLBACK;
