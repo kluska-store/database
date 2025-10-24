@@ -20,7 +20,7 @@ ALTER TABLE "wish_list_item"
     ADD FOREIGN KEY ("product_id") REFERENCES "product" ("id");
 
 ALTER TABLE "cart_item"
-    ADD FOREIGN KEY ("cart_it") REFERENCES "cart" ("id"),
+    ADD FOREIGN KEY ("cart_id") REFERENCES "cart" ("id"),
     ADD FOREIGN KEY ("product_id") REFERENCES "product" ("id");
 
 ALTER TABLE "payment"
