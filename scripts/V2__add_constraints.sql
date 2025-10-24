@@ -28,3 +28,27 @@ ALTER TABLE "payment"
 ALTER TABLE "transference"
     ADD FOREIGN KEY ("store_id") REFERENCES "store" ("id"),
     ADD FOREIGN KEY ("payment_id") REFERENCES "payment" ("id");
+
+
+-- COMPLEX UNIQUE CONSTRAINTS
+CREATE UNIQUE INDEX "idx_unique_active_store_cnpj"
+    ON "store" ("cnpj") WHERE ("is_active");
+
+CREATE UNIQUE INDEX "idx_unique_active_store_address"
+    ON "store" ("address_id") WHERE ("is_active");
+
+CREATE UNIQUE INDEX "idx_unique_active_user_cpf"
+    ON "user" ("cpf") WHERE ("is_active");
+
+CREATE UNIQUE INDEX "idx_unique_active_user_email"
+    ON "user" ("email") WHERE ("is_active");
+
+CREATE UNIQUE INDEX "idx_unique_active_user_phone"
+    ON "user" ("phone") WHERE ("is_active");
+
+ALTER TABLE "wish_list"
+    ADD CONSTRAINT "unique_wish_list_per_user" UNIQUE ("name", "user_id");
+
+ALTER TABLE "product"
+    ADD CONSTRAINT "unique_product_per_store" UNIQUE ("name", "store_id");
+
