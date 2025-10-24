@@ -1,20 +1,8 @@
 BEGIN;
 
-DROP TABLE IF EXISTS "transference";
-DROP TABLE IF EXISTS "wish_list_item";
-DROP TABLE IF EXISTS "cart_item";
-DROP TABLE IF EXISTS "wish_list";
-DROP TABLE IF EXISTS "payment";
-DROP TABLE IF EXISTS "payment_method";
-DROP TABLE IF EXISTS "cart";
-DROP TABLE IF EXISTS "session";
-DROP TABLE IF EXISTS "product";
-DROP TABLE IF EXISTS "user";
-DROP TABLE IF EXISTS "store";
-DROP TABLE IF EXISTS "store_phones";
-DROP TABLE IF EXISTS "address";
-
-DROP EXTENSION IF EXISTS "pgcrypto";
+DROP SCHEMA "public" CASCADE;
+CREATE SCHEMA "public";
+GRANT ALL ON SCHEMA "public" TO "public", "avnadmin";
 
 COMMIT;
--- ROLLBACK;
+ROLLBACK;
