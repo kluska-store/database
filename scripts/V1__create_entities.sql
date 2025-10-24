@@ -6,6 +6,7 @@ CREATE TABLE "store" (
   "name" VARCHAR(50) NOT NULL,
   "picture_url" VARCHAR(255),
   "email" VARCHAR(100) NOT NULL,
+  "is_active" BOOLEAN NOT NULL DEFAULT FALSE,
   "address_id" INTEGER UNIQUE NOT NULL
 );
 
