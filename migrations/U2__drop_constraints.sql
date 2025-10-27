@@ -3,14 +3,17 @@ BEGIN;
 ALTER TABLE "store"
     DROP CONSTRAINT IF EXISTS "fk_store_address_id__address_id";
 
+ALTER TABLE "store_session"
+    DROP CONSTRAINT IF EXISTS "fk_store_session_store_id__store_id";
+
 ALTER TABLE "store_phones"
     DROP CONSTRAINT IF EXISTS "fk_store_phones_store_id__store_id";
 
 ALTER TABLE "user"
     DROP CONSTRAINT IF EXISTS "fk_user_address_id__address_id";
 
-ALTER TABLE "session"
-    DROP CONSTRAINT IF EXISTS "fk_session_user_id__user_id";
+ALTER TABLE "user_session"
+    DROP CONSTRAINT IF EXISTS "fk_user_session_user_id__user_id";
 
 ALTER TABLE "product"
     DROP CONSTRAINT IF EXISTS "fk_product_store_id__store_id",

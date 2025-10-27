@@ -5,6 +5,10 @@ ALTER TABLE "store" ADD CONSTRAINT "fk_store_address_id__address_id"
     FOREIGN KEY ("address_id") REFERENCES "address" ("id")
     ON DELETE SET NULL;
 
+ALTER TABLE "store_session" ADD CONSTRAINT "fk_store_session_store_id__store_id"
+    FOREIGN KEY ("store_id") REFERENCES "store" ("id")
+    ON DELETE CASCADE;
+
 ALTER TABLE "store_phones" ADD CONSTRAINT "fk_store_phones_store_id__store_id"
     FOREIGN KEY ("store_id") REFERENCES "store" ("id")
     ON DELETE CASCADE;
@@ -13,7 +17,7 @@ ALTER TABLE "user" ADD CONSTRAINT "fk_user_address_id__address_id"
     FOREIGN KEY ("address_id") REFERENCES "address" ("id")
     ON DELETE SET NULL;
 
-ALTER TABLE "session" ADD CONSTRAINT "fk_session_user_id__user_id"
+ALTER TABLE "user_session" ADD CONSTRAINT "fk_user_session_user_id__user_id"
     FOREIGN KEY ("user_id") REFERENCES "user" ("id")
     ON DELETE CASCADE;
 
