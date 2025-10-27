@@ -9,6 +9,7 @@ CREATE TABLE "store" (
   "picture_url" VARCHAR(255),
   "email" VARCHAR(100) NOT NULL,
   "is_active" BOOLEAN NOT NULL DEFAULT FALSE,
+  "password" VARCHAR(100) NOT NULL,
   "address_id" INTEGER UNIQUE
 );
 
@@ -38,6 +39,7 @@ CREATE TABLE "user" (
   "phone" VARCHAR(15) NOT NULL,
   "birthday" DATE NOT NULL,
   "is_active" BOOLEAN NOT NULL DEFAULT FALSE,
+  "password" VARCHAR(100) NOT NULL,
   "address_id" INTEGER UNIQUE
 );
 
