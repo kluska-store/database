@@ -1,3 +1,4 @@
 psycopg-binary>=3.1
 argon2-cffi
 python-dotenv
+autopep8
