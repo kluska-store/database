@@ -1,10 +1,9 @@
 from db import get_connection
-from seed_data import *
+from seed_data import load_payment_methods
 
 
 def load():
   with get_connection() as conn:
-    load_initial_users(conn)
     load_payment_methods(conn)
 
 
