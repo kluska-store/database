@@ -4,14 +4,10 @@ from argon2 import PasswordHasher
 
 
 def load_payment_methods(conn: Connection[TupleRow]):
-  payment_methods = [
-      ('Crédito'),
-      ('Débito'),
-      ('Pix')
-  ]
+  payment_methods = [('Crédito',), ('Débito',), ('Pix',)]
 
   with conn.cursor() as c:
-    c.executemany('INSERT INTO payment_method(id, method) VALUES (%s)', payment_methods)
+    c.executemany('INSERT INTO payment_method(method) VALUES (%s)', payment_methods)
     print('Payment methods initialized')
 
 
@@ -31,7 +27,21 @@ def load_initial_users(conn: Connection[TupleRow]):
           None
       )
   ]
-  
+
   with conn.cursor() as c:
-    c.execute('INSERT INTO users(cpf, profile_pic_url, email, username, phone, birthday, is_active, password, address_id)')
+    sql = '''
+          INSERT INTO "user"(
+            "cpf", 
+            "profile_pic_url", 
+            "email", 
+            "username", 
+            "phone", 
+            "birthday", 
+            "is_active", 
+            "password", 
+            "address_id"
+          ) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+          '''
+
+    c.executemany(sql, initial_users)
     print('Default users initialized')
