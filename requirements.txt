@@ -3,3 +3,6 @@ argon2-cffi
 python-dotenv
 autopep8
 faker
+numpy
+pandas
+jupyter
