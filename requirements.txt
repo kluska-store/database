@@ -5,3 +5,4 @@ autopep8
 faker
 pandas
 jupyter
+python-dateutil
