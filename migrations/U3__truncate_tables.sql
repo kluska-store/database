@@ -16,6 +16,6 @@ TRUNCATE TABLE
     "user_session",
     "wish_list",
     "wish_list_item"
-    CASCADE;
+    RESTART IDENTITY CASCADE;
 
 COMMIT;
