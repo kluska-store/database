@@ -14,6 +14,7 @@ ph = PasswordHasher()
 fk = Faker('pt-BR')
 QNT = 10
 
+
 def generate_addresses(qnt=2 * QNT - 1):
     complements = ['Casa 2', 'Apto. 162', 'Casa B', 'Galpão A', None, None, None, None, None, None]
     raw_addresses = []
@@ -32,6 +33,7 @@ def generate_addresses(qnt=2 * QNT - 1):
 
     return raw_addresses
 
+
 def id_generator(df: pd.DataFrame):
     next_id = 0
     while True:
@@ -39,13 +41,17 @@ def id_generator(df: pd.DataFrame):
         if next_id == 0: continue
         yield next_id
 
+
+def get_data(df: pd.DataFrame, cols: list[str]):
+    return df[cols].itertuples(index=False, name=None)
+
+
 addresses = pd.DataFrame(
     data=generate_addresses(),
     columns=['country', 'state', 'city', 'street', 'number', 'postal_code', 'complement']
 )
 
 seq_address_id = id_generator(addresses)
-
 
 gen_date = lambda: fk.date_between(datetime.now() - relativedelta(years=50), datetime.now() - relativedelta(years=12))
 gen_password = lambda size: fk.password(length=size)
@@ -67,7 +73,6 @@ users['phone'] = users['phone'].apply(lambda x: re.sub(r'[^0-9]', '', x))
 users.to_csv('csv/test_logins.csv', columns=['email', 'raw_password'])
 users.drop(columns=['raw_password'], inplace=True)
 
-
 stores = pd.DataFrame({
     'cnpj': [fk.cnpj() for _ in range(QNT)],
     'name': [fk.company() for _ in range(QNT)],
@@ -84,14 +89,12 @@ stores.drop(columns=['raw_password'], inplace=True)
 
 seq_store_id = id_generator(stores)
 
-
 store_phones = pd.DataFrame({
     'phone': [fk.cellphone_number() for _ in range(QNT + QNT // 5)],
     'store_id': [next(seq_store_id) for _ in range(QNT + QNT // 5)]
 })
 
 store_phones['phone'] = store_phones['phone'].apply(lambda x: re.sub(r'[^0-9+]', '', x))
-
 
 products = pd.DataFrame({
     'name': [f'{fk.word().capitalize()} {fk.word()}' for _ in range(QNT * 10)],
@@ -100,8 +103,6 @@ products = pd.DataFrame({
     'store_id': [next(seq_store_id) for _ in range(QNT * 10)]
 })
 
-
 carts = pd.DataFrame({
     'user_id': [i + 1 for i in range(len(users))]
 })
-
