@@ -92,6 +92,7 @@ stores = pd.DataFrame({
 })
 
 stores['password'] = stores['raw_password'].apply(ph.hash)
+stores['cnpj'] = stores['cnpj'].apply(lambda x: re.sub('[./-]', '', x))
 stores.to_csv('csv/test_store_logins.csv', columns=['email', 'raw_password'])
 stores.drop(columns=['raw_password'], inplace=True)
 
