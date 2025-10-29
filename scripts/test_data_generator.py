@@ -70,6 +70,7 @@ users = pd.DataFrame({
 
 users['password'] = users['raw_password'].apply(ph.hash)
 users['phone'] = users['phone'].apply(lambda x: re.sub(r'[^0-9]', '', x))
+users['cpf'] = users['cpf'].apply(lambda x: re.sub(r'[.-]', '', x))
 users.to_csv('csv/test_logins.csv', columns=['email', 'raw_password'])
 users.drop(columns=['raw_password'], inplace=True)
 
