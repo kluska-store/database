@@ -24,3 +24,15 @@ def load_test_users(conn: Connection[TupleRow]):
         )
 
     print('Test users initialized')
+
+
+def load_test_stores(conn: Connection[TupleRow]):
+    with conn.cursor() as c:
+        c.executemany(
+            '''
+            INSERT INTO store (cnpj, name, picture_url, email, password, address_id)
+            VALUES (%s, %s, %s, %s, %s, %s)''',
+            get_data(stores, ['cnpj', 'name', 'picture_url', 'email', 'password', 'address_id'])
+        )
+
+    print('Test stores initialized')

@@ -8,6 +8,7 @@ def load():
         load_payment_methods(conn)
         load_test_addresses(conn)
         load_test_users(conn)
+        load_test_stores(conn)
 
 
 if __name__ == '__main__':
