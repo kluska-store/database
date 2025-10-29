@@ -1,6 +1,5 @@
 from psycopg import Connection
 from psycopg.rows import TupleRow
-from argon2 import PasswordHasher
 
 
 def load_payment_methods(conn: Connection[TupleRow]):
