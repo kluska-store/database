@@ -1,3 +1,4 @@
+ROLLBACK;
 BEGIN;
 
 CREATE EXTENSION IF NOT EXISTS "pgcrypto";
@@ -107,4 +108,3 @@ CREATE TABLE "transference" (
 );
 
 COMMIT;
-ROLLBACK;

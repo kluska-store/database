@@ -1,3 +1,4 @@
+ROLLBACK;
 BEGIN;
 
 -- FOREIGN KEYS
@@ -89,4 +90,3 @@ ALTER TABLE "product"
     ADD CONSTRAINT "unique_product_per_store" UNIQUE ("name", "store_id");
 
 COMMIT;
-ROLLBACK;

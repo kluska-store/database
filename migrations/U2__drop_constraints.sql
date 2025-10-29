@@ -1,3 +1,4 @@
+ROLLBACK;
 BEGIN;
 
 ALTER TABLE "store"
@@ -50,4 +51,3 @@ DROP INDEX IF EXISTS
     "idx_unique_active_user_phone";
 
 COMMIT;
-ROLLBACK;
