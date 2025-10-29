@@ -7,6 +7,7 @@ def load():
     with get_connection() as conn:
         load_payment_methods(conn)
         load_test_addresses(conn)
+        load_test_users(conn)
 
 
 if __name__ == '__main__':
