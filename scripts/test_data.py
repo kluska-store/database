@@ -65,3 +65,27 @@ def load_test_carts(conn: Connection[TupleRow]):
         c.executemany('INSERT INTO cart (user_id) VALUES (%s)', user_ids)
 
     print('Test carts initialized')
+
+
+def load_test_products(conn: Connection[TupleRow]):
+    with conn.cursor() as c:
+        c.execute('SELECT id FROM store')
+        store_ids = [row[0] for row in c.fetchall()]
+
+    i = 0
+    expanded_store_ids = [*store_ids]
+    while len(expanded_store_ids) < len(products):
+        expanded_store_ids.append(store_ids[i])
+        i = (i + 1) % len(store_ids)
+
+    product_data = get_data(products, ['name', 'price', 'attributes'])
+    complete_products = [(*product, store_id) for product, store_id in zip(product_data, expanded_store_ids)]
+    with conn.cursor() as c:
+        c.executemany(
+            '''
+            INSERT INTO product (name, price, attributes, store_id)
+            VALUES (%s, %s, %s, %s)''',
+            complete_products
+        )
+
+    print('Test products initialized')
