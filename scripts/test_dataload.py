@@ -10,6 +10,7 @@ def load():
         load_test_users(conn)
         load_test_stores(conn)
         load_test_store_phones(conn)
+        load_test_carts(conn)
 
 
 if __name__ == '__main__':

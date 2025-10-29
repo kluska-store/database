@@ -55,3 +55,13 @@ def load_test_store_phones(conn: Connection[TupleRow]):
         c.executemany('INSERT INTO store_phones (phone, store_id) VALUES (%s, %s)', phones)
 
     print('Test store phones initialized')
+
+
+def load_test_carts(conn: Connection[TupleRow]):
+    with conn.cursor() as c:
+        c.execute('SELECT id FROM "user"')
+        user_ids = c.fetchall()
+
+        c.executemany('INSERT INTO cart (user_id) VALUES (%s)', user_ids)
+
+    print('Test carts initialized')
