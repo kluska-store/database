@@ -2,6 +2,7 @@ from psycopg import Connection
 from psycopg.rows import TupleRow
 from test_data_generator import *
 
+
 def load_test_addresses(conn: Connection[TupleRow]):
     with conn.cursor() as c:
         c.executemany(
@@ -36,3 +37,21 @@ def load_test_stores(conn: Connection[TupleRow]):
         )
 
     print('Test stores initialized')
+
+
+def load_test_store_phones(conn: Connection[TupleRow]):
+    with conn.cursor() as c:
+        c.execute('SELECT id FROM store')
+        store_ids = [row[0] for row in c.fetchall()]
+
+    i = 0
+    expanded_store_ids = [*store_ids]
+    while len(expanded_store_ids) < len(store_phones):
+        expanded_store_ids.append(store_ids[i])
+        i = (i + 1) % len(store_ids)
+
+    phones = [(phone, store_id) for phone, store_id in zip(store_phones, expanded_store_ids)]
+    with conn.cursor() as c:
+        c.executemany('INSERT INTO store_phones (phone, store_id) VALUES (%s, %s)', phones)
+
+    print('Test store phones initialized')
