@@ -4,5 +4,6 @@ import os
 
 load_dotenv()
 
+
 def get_connection():
-  return pg.connect(os.getenv('DB_URL'))
+    return pg.connect(os.getenv('DB_URL'))

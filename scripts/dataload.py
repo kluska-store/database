@@ -3,11 +3,11 @@ from seed_data import load_payment_methods
 
 
 def load():
-  with get_connection() as conn:
-    load_payment_methods(conn)
+    with get_connection() as conn:
+        load_payment_methods(conn)
 
 
 if __name__ == '__main__':
-  print('Executing dataload script')
-  load()
-  print('Dataload finished successfully')
+    print('Executing dataload script')
+    load()
+    print('Dataload finished successfully')
