@@ -15,6 +15,7 @@ ph = PasswordHasher()
 fk = Faker('pt-BR')
 QNT = 10
 
+
 # Functions
 def generate_addresses(qnt=2 * QNT - 1):
     complements = ['Casa 2', 'Apto. 162', 'Casa B', 'Galpão A', None, None, None, None, None, None]
@@ -50,7 +51,6 @@ def get_data(df: pd.DataFrame, cols: list[str]):
 gen_date = lambda: fk.date_between(datetime.now() - relativedelta(years=50), datetime.now() - relativedelta(years=12))
 gen_password = lambda size: fk.password(length=size)
 
-
 # Address
 addresses = pd.DataFrame(
     data=generate_addresses(),
@@ -58,7 +58,6 @@ addresses = pd.DataFrame(
 )
 
 seq_address_id = id_generator(addresses)
-
 
 # User
 users = pd.DataFrame({
@@ -79,7 +78,6 @@ users['cpf'] = users['cpf'].apply(lambda x: re.sub(r'[.-]', '', x))
 users.to_csv('csv/test_logins.csv', columns=['email', 'raw_password'])
 users.drop(columns=['raw_password'], inplace=True)
 
-
 # Store
 stores = pd.DataFrame({
     'cnpj': [fk.cnpj() for _ in range(QNT)],
@@ -96,28 +94,13 @@ stores['cnpj'] = stores['cnpj'].apply(lambda x: re.sub('[./-]', '', x))
 stores.to_csv('csv/test_store_logins.csv', columns=['email', 'raw_password'])
 stores.drop(columns=['raw_password'], inplace=True)
 
-seq_store_id = id_generator(stores)
-
-
 # Store Phone
-store_phones = pd.DataFrame({
-    'phone': [fk.cellphone_number() for _ in range(QNT + QNT // 5)],
-    'store_id': [next(seq_store_id) for _ in range(QNT + QNT // 5)]
-})
-
-store_phones['phone'] = store_phones['phone'].apply(lambda x: re.sub(r'[^0-9+]', '', x))
-
+store_phones = [fk.cellphone_number() for _ in range(QNT + QNT // 5)]
+store_phones = [re.sub(r'[^0-9+]', '', p) for p in store_phones]
 
 # Product
 products = pd.DataFrame({
     'name': [f'{fk.word().capitalize()} {fk.word()}' for _ in range(QNT * 10)],
     'price': [round(rd.uniform(10, 100), 2) for _ in range(QNT * 10)],
-    'attributes': [None] * QNT * 10,
-    'store_id': [next(seq_store_id) for _ in range(QNT * 10)]
-})
-
-
-# Cart
-carts = pd.DataFrame({
-    'user_id': [i + 1 for i in range(len(users))]
+    'attributes': [None] * QNT * 10
 })
