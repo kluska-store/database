@@ -100,6 +100,13 @@ CREATE TABLE "cart_item"
     "amount"     INTEGER NOT NULL DEFAULT 1 CHECK ("amount" > 0)
 );
 
+/*
+Although it's necessary to have a payment method,
+it must be nullable to avoid data loss if some payment method is deleted
+
+Same thing about user: if, somehow, the user is deleted,
+I cannot lose payment data, so the field must be nullable
+*/
 CREATE TABLE "payment"
 (
     "id"                INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
@@ -115,6 +122,10 @@ CREATE TABLE "payment_method"
     "method" VARCHAR(30) UNIQUE NOT NULL
 );
 
+/*
+Here, in case either the store or the payment is deleted
+I cannot lose monetary data
+*/
 CREATE TABLE "transference"
 (
     "id"         INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
