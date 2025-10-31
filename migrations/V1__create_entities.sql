@@ -82,7 +82,8 @@ CREATE TABLE "wish_list_item"
 (
     "id"           INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "wish_list_id" INTEGER NOT NULL,
-    "product_id"   INTEGER NOT NULL
+    "product_id"   INTEGER NOT NULL,
+    "amount"       INTEGER NOT NULL DEFAULT 1 CHECK ("amount" > 0)
 );
 
 CREATE TABLE "cart"
@@ -95,13 +96,14 @@ CREATE TABLE "cart_item"
 (
     "id"         INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "cart_id"    INTEGER NOT NULL,
-    "product_id" INTEGER NOT NULL
+    "product_id" INTEGER NOT NULL,
+    "amount"     INTEGER NOT NULL DEFAULT 1 CHECK ("amount" > 0)
 );
 
 CREATE TABLE "payment"
 (
     "id"                INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    "value"             NUMERIC(10, 2) NOT NULL,
+    "value"             NUMERIC(10, 2) NOT NULL CHECK ("value" > 0),
     "date"              TIMESTAMP      NOT NULL,
     "payment_method_id" INTEGER,
     "user_id"           UUID
