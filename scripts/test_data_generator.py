@@ -17,7 +17,7 @@ QNT = 10
 
 
 # Functions
-def generate_addresses(qnt=2 * QNT - 1):
+def generate_addresses(qnt=2 * QNT):
     complements = ['Casa 2', 'Apto. 162', 'Casa B', 'Galpão A', None, None, None, None, None, None]
     raw_addresses = []
 
