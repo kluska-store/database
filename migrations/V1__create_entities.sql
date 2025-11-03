@@ -36,7 +36,7 @@ CREATE TABLE "address"
     "state"       VARCHAR(50)  NOT NULL,
     "city"        VARCHAR(100) NOT NULL,
     "street"      VARCHAR(100) NOT NULL,
-    "number"      INTEGER      NOT NULL,
+    "number"      INTEGER      NOT NULL CHECK ("number" >= 0),
     "postal_code" VARCHAR(10)  NOT NULL,
     "complement"  VARCHAR(255)
 );
@@ -49,7 +49,7 @@ CREATE TABLE "user"
     "email"           VARCHAR(50)        NOT NULL,
     "username"        VARCHAR(50)        NOT NULL,
     "phone"           VARCHAR(15)        NOT NULL,
-    "birthday"        DATE               NOT NULL,
+    "birthday"        DATE               NOT NULL CHECK ("birthday" < current_date - interval '16 years'),
     "is_active"       BOOLEAN            NOT NULL DEFAULT FALSE,
     "password"        VARCHAR(100)       NOT NULL,
     "address_id"      INTEGER UNIQUE
@@ -66,7 +66,7 @@ CREATE TABLE "product"
 (
     "id"         INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     "name"       VARCHAR(100)   NOT NULL,
-    "price"      NUMERIC(10, 2) NOT NULL,
+    "price"      NUMERIC(10, 2) NOT NULL CHECK ("price" > 0),
     "attributes" JSONB,
     "store_id"   UUID           NOT NULL
 );
