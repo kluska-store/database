@@ -37,7 +37,7 @@ CREATE TABLE "address"
     "city"        VARCHAR(100) NOT NULL,
     "street"      VARCHAR(100) NOT NULL,
     "number"      INTEGER      NOT NULL CHECK ("number" >= 0),
-    "postal_code" VARCHAR(10)  NOT NULL,
+    "postal_code" VARCHAR(8)  NOT NULL,
     "complement"  VARCHAR(255)
 );
 
