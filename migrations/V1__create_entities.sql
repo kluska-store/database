@@ -37,7 +37,7 @@ CREATE TABLE "address"
     "city"        VARCHAR(100) NOT NULL,
     "street"      VARCHAR(100) NOT NULL,
     "number"      INTEGER      NOT NULL CHECK ("number" >= 0),
-    "postal_code" VARCHAR(8)  NOT NULL,
+    "postal_code" VARCHAR(8)   NOT NULL,
     "complement"  VARCHAR(255)
 );
 
@@ -104,7 +104,7 @@ CREATE TABLE "cart_item"
 Although it's necessary to have a payment method,
 it must be nullable to avoid data loss if some payment method is deleted
 
-Same thing about user: if, somehow, the user is deleted,
+Same thing about cart: if, somehow, the user is deleted together with its cart,
 I cannot lose payment data, so the field must be nullable
 */
 CREATE TABLE "payment"
@@ -113,7 +113,7 @@ CREATE TABLE "payment"
     "value"             NUMERIC(10, 2) NOT NULL CHECK ("value" > 0),
     "date"              TIMESTAMP      NOT NULL,
     "payment_method_id" INTEGER,
-    "user_id"           UUID
+    "cart_id"           INTEGER
 );
 
 CREATE TABLE "payment_method"

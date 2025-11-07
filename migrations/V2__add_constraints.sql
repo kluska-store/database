@@ -62,8 +62,8 @@ ALTER TABLE "payment"
     ADD CONSTRAINT "fk_payment_payment_method_id__payment_method_id"
         FOREIGN KEY ("payment_method_id") REFERENCES "payment_method" ("id")
             ON DELETE SET NULL,
-    ADD CONSTRAINT "fk_payment_user_id__user_id"
-        FOREIGN KEY ("user_id") REFERENCES "user" ("id")
+    ADD CONSTRAINT "fk_payment_cart_id__cart_id"
+        FOREIGN KEY ("cart_id") REFERENCES "cart" ("id")
             ON DELETE SET NULL;
 
 ALTER TABLE "transference"

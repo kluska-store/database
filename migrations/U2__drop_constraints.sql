@@ -37,7 +37,7 @@ ALTER TABLE "cart_item"
 
 ALTER TABLE "payment"
     DROP CONSTRAINT IF EXISTS "fk_payment_payment_method_id__payment_method_id",
-    DROP CONSTRAINT IF EXISTS "fk_payment_user_id__user_id";
+    DROP CONSTRAINT IF EXISTS "fk_payment_cart_id__cart_id";
 
 ALTER TABLE "transference"
     DROP CONSTRAINT IF EXISTS "fk_transference_store_id__store_id",
