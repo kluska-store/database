@@ -1,6 +1,7 @@
 from dateutil.relativedelta import relativedelta
 from argon2 import PasswordHasher
 from datetime import datetime
+from pathlib import Path
 from faker import Faker
 import pandas as pd
 import random as rd
@@ -11,6 +12,7 @@ SEED = 29
 Faker.seed(SEED)
 rd.seed(SEED)
 
+csv_dir = Path(__file__).resolve().parent / 'csv'
 ph = PasswordHasher()
 fk = Faker('pt-BR')
 QNT = 10
@@ -75,7 +77,7 @@ users = pd.DataFrame({
 users['password'] = users['raw_password'].apply(ph.hash)
 users['phone'] = users['phone'].apply(lambda x: re.sub(r'[^0-9]', '', x))
 users['cpf'] = users['cpf'].apply(lambda x: re.sub(r'[.-]', '', x))
-users.to_csv('csv/test_logins.csv', columns=['email', 'raw_password'])
+users.to_csv(csv_dir / 'test_logins.csv', columns=['email', 'raw_password'])
 users.drop(columns=['raw_password'], inplace=True)
 
 # Store
@@ -91,7 +93,7 @@ stores = pd.DataFrame({
 
 stores['password'] = stores['raw_password'].apply(ph.hash)
 stores['cnpj'] = stores['cnpj'].apply(lambda x: re.sub('[./-]', '', x))
-stores.to_csv('csv/test_store_logins.csv', columns=['email', 'raw_password'])
+stores.to_csv(csv_dir / 'test_store_logins.csv', columns=['email', 'raw_password'])
 stores.drop(columns=['raw_password'], inplace=True)
 
 # Store Phone
